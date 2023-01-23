@@ -26,7 +26,7 @@ export const initialState = {
       title: 'Nokia',
       price: 50,
       category: 'Used',
-      ratting: 5,
+      ratting: 50,
     },
   ],
   search: '',
