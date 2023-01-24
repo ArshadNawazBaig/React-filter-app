@@ -8,15 +8,31 @@ const contains = [
 ];
 
 const CheckBoxFilter = () => {
-  const [checked, setChecked] = useState([1, 2, 3]);
+  const [checked, setChecked] = useState([]);
 
   const handleTogle = (value) => {
     const currentIndex = checked.indexOf(value);
-    console.log(currentIndex);
+    console.log(value, checked);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
   };
   return (
     <div>
-      <Checkbox onChecked={handleTogle} />
+      {contains.map((contain) => (
+        <Checkbox
+          onChecked={handleTogle}
+          key={contain.id}
+          id={contain.id}
+          checked={checked.indexOf(contain.id) === -1 ? false : true}
+        />
+      ))}
     </div>
   );
 };
