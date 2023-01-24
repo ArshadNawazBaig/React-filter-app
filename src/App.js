@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useReducer, useState } from 'react';
 import './App.css';
+import CheckBoxFilter from './components/CheckboxFilter';
 import Filter from './components/Filter';
 import { initialState, reducer, TYPES } from './components/state';
 
@@ -37,6 +38,7 @@ function App() {
           <p>{price}</p>
         </div>
       ))}
+      <CheckBoxFilter />
     </div>
   );
 }
