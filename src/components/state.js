@@ -62,17 +62,17 @@ export const reducer = (state, { type, payload }) => {
         category: payload,
       };
 
-    case TYPES.CATEGORY:
+    case TYPES.REGION:
       const currentIndex = state.region.indexOf(payload);
       const newRegionArray = [...state.region];
       if (currentIndex === -1) {
-        newRegionArray.push(payload);
+        newRegionArray.push(payload.toLowerCase());
       } else {
         newRegionArray.splice(currentIndex, 1);
       }
       return {
         ...state,
-        category: newRegionArray,
+        region: newRegionArray,
       };
 
     default:

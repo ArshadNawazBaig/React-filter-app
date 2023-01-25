@@ -1,7 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useState } from 'react';
-
-const Filter = ({ products, handleSearch, search, handleCategory }) => {
+import Checkbox from './Checkbox';
+import { initialState, reducer, TYPES } from './state';
+const Filter = ({
+  products,
+  handleSearch,
+  search,
+  handleCategory,
+  constrains,
+}) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { region: myRegions } = state;
   const [uniqueOptions, setUniqueOptions] = useState([]);
   useEffect(() => {
     if (products.length > 0) {
@@ -10,6 +19,9 @@ const Filter = ({ products, handleSearch, search, handleCategory }) => {
       ]);
     }
   }, []);
+  const toggleFunc = (value) => {
+    dispatch({ type: TYPES.REGION, payload: value });
+  };
 
   return (
     <div>
@@ -31,6 +43,19 @@ const Filter = ({ products, handleSearch, search, handleCategory }) => {
         name="Free"
         onChange={(e) => console.log(e.target.checked)}
       />
+      <div>
+        {myRegions}
+        {constrains.map((region, i) => (
+          <Checkbox
+            onChecked={toggleFunc}
+            checked={
+              myRegions.indexOf(region.name.toLowerCase()) === -1 ? false : true
+            }
+            id={region.name.toLowerCase()}
+            key={i + region}
+          />
+        ))}
+      </div>
     </div>
   );
 };
