@@ -32,7 +32,7 @@ function App() {
       payload.includes(product.region)
     );
     console.log(filteredData);
-    // dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
+    dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
   };
 
   return (
