@@ -12,7 +12,6 @@ const CheckBoxFilter = () => {
 
   const handleTogle = (value) => {
     const currentIndex = checked.indexOf(value);
-    console.log(value, checked);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {

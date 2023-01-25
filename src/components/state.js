@@ -3,6 +3,7 @@ export const TYPES = {
   SEARCH: 'SEARCH',
   RATTING: 'RATTING',
   CATEGORY: 'CATEGORY',
+  REGION: 'REGION',
 };
 
 export const initialState = {
@@ -31,11 +32,8 @@ export const initialState = {
   ],
   search: '',
   ratting: 0,
-  category: [
-    { name: 'free', value: false },
-    { name: 'paid', value: false },
-    { name: 'universal', value: false },
-  ],
+  category: [],
+  region: [],
 };
 
 export const reducer = (state, { type, payload }) => {
@@ -62,6 +60,19 @@ export const reducer = (state, { type, payload }) => {
       return {
         ...state,
         category: payload,
+      };
+
+    case TYPES.CATEGORY:
+      const currentIndex = state.region.indexOf(payload);
+      const newRegionArray = [...state.region];
+      if (currentIndex === -1) {
+        newRegionArray.push(payload);
+      } else {
+        newRegionArray.splice(currentIndex, 1);
+      }
+      return {
+        ...state,
+        category: newRegionArray,
       };
 
     default:
