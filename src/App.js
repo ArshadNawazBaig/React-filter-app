@@ -10,7 +10,7 @@ const constrains = [
 ];
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { search, ratting, category, products } = state;
+  const { search, ratting, category, products, region } = state;
 
   const handleSearch = (payload) => {
     dispatch({ type: TYPES.SEARCH, payload });
@@ -27,6 +27,14 @@ function App() {
     dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
   };
 
+  const handleRegion = (payload) => {
+    const filteredData = products.filter((product) =>
+      payload.includes(product.region)
+    );
+    console.log(filteredData);
+    // dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
+  };
+
   return (
     <div className="App">
       <Filter
@@ -35,13 +43,19 @@ function App() {
         handleSearch={handleSearch}
         handleCategory={handleCategory}
         constrains={constrains}
+        handleRegion={handleRegion}
       />
-      {products.map(({ id, title, price }) => (
-        <div className="" key={id}>
-          <p>{title}</p>
-          <p>{price}</p>
-        </div>
-      ))}
+      <div className="container">
+        {products.map(({ id, title, price, src }) => (
+          <div className="card" key={id}>
+            <img src={src} width="200" height="200" />
+            <div className="content">
+              <p>{title}</p>
+              <p>${price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

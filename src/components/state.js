@@ -13,6 +13,8 @@ export const initialState = {
       title: 'Iphone',
       price: 100,
       category: 'Used',
+      region: 'india',
+      src: './images/product.jpg',
       ratting: 4,
     },
     {
@@ -20,6 +22,8 @@ export const initialState = {
       title: 'Oneplus',
       price: 200,
       category: 'New',
+      region: 'pakistan',
+      src: './images/product.jpg',
       ratting: 3,
     },
     {
@@ -27,6 +31,8 @@ export const initialState = {
       title: 'Nokia',
       price: 50,
       category: 'Used',
+      region: 'africa',
+      src: './images/product.jpg',
       ratting: 50,
     },
   ],

@@ -8,6 +8,7 @@ const Filter = ({
   search,
   handleCategory,
   constrains,
+  handleRegion,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { region: myRegions } = state;
@@ -20,6 +21,7 @@ const Filter = ({
     }
   }, []);
   const toggleFunc = (value) => {
+    handleRegion(myRegions);
     dispatch({ type: TYPES.REGION, payload: value });
   };
 
@@ -44,14 +46,13 @@ const Filter = ({
         onChange={(e) => console.log(e.target.checked)}
       />
       <div>
-        {myRegions}
         {constrains.map((region, i) => (
           <Checkbox
             onChecked={toggleFunc}
             checked={
               myRegions.indexOf(region.name.toLowerCase()) === -1 ? false : true
             }
-            id={region.name.toLowerCase()}
+            label={region.name.toLowerCase()}
             key={i + region}
           />
         ))}

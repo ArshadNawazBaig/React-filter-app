@@ -28,7 +28,7 @@ const CheckBoxFilter = () => {
         <Checkbox
           onChecked={handleTogle}
           key={contain.id}
-          id={contain.id}
+          label={contain.id}
           checked={checked.indexOf(contain.id) === -1 ? false : true}
         />
       ))}
