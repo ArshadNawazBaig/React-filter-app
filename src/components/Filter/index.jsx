@@ -14,6 +14,12 @@ export const Filter = ({ products, setFilteredProducts }) => {
         product.name.toLowerCase().includes(searchValue.toLowerCase())
       );
     }
+    if (selectedCategory && selectedCategory !== 'all') {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === selectedCategory
+      );
+    }
+    setFilteredProducts(filteredProducts);
   };
 
   return (
