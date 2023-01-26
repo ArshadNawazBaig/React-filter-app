@@ -1,61 +1,52 @@
-import axios from 'axios';
-import { useReducer, useState } from 'react';
-import './App.css';
-import Filter from './components/Filter';
-import { initialState, reducer, TYPES } from './components/state';
-const constrains = [
-  { name: 'Africa', id: 1 },
-  { name: 'Pakistan', id: 2 },
-  { name: 'India', id: 3 },
+import { useState } from 'react';
+import { Card } from './components/Card';
+import { Filter } from './components/Filter';
+const products = [
+  {
+    id: 1,
+    name: 'Apple',
+    region: 'North America',
+    status: 'Available',
+    price: 20,
+    category: 'Fruit',
+    colors: ['red', 'green', 'yellow'],
+  },
+  {
+    id: 2,
+    name: 'Banana',
+    region: 'South America',
+    status: 'Available',
+    price: 20,
+    category: 'Fruit',
+    colors: ['green', 'yellow', 'brown'],
+  },
+  {
+    id: 3,
+    name: 'Carrot',
+    region: 'Europe',
+    status: 'Available',
+    price: 20,
+    category: 'Vegetable',
+    colors: ['orange', 'yellow', 'white'],
+  },
 ];
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { search, ratting, category, products, region } = state;
-
-  const handleSearch = (payload) => {
-    dispatch({ type: TYPES.SEARCH, payload });
-    const filteredData = products.filter((product) =>
-      product.title.toLowerCase().includes(search.toLowerCase())
-    );
-    dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
-  };
-
-  const handleCategory = (payload) => {
-    const filteredData = products.filter(
-      (product) => product.category === payload
-    );
-    dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
-  };
-
-  const handleRegion = (payload) => {
-    const filteredData = products.filter((product) =>
-      payload.includes(product.region)
-    );
-    console.log(filteredData);
-    dispatch({ type: TYPES.PRODUCTS, payload: filteredData });
-  };
-
+  const [filteredProducts, setFilteredProducts] = useState(products);
   return (
     <div className="App">
       <Filter
-        products={products}
-        search={search}
-        handleSearch={handleSearch}
-        handleCategory={handleCategory}
-        constrains={constrains}
-        handleRegion={handleRegion}
+        products={filteredProducts}
+        setFilteredProducts={setFilteredProducts}
       />
-      <div className="container">
-        {products.map(({ id, title, price, src }) => (
-          <div className="card" key={id}>
-            <img src={src} width="200" height="200" />
-            <div className="content">
-              <p>{title}</p>
-              <p>${price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      {filteredProducts.map((product) => (
+        <>
+          <Card
+            image="./images/product.jpg"
+            title={product.name}
+            price={product.price}
+          />
+        </>
+      ))}
     </div>
   );
 }
