@@ -19,6 +19,12 @@ export const Filter = ({ products, setFilteredProducts }) => {
         (product) => product.category === selectedCategory
       );
     }
+
+    if (selectedColors.length > 0) {
+      filteredProducts = filteredProducts.filter((product) => {
+        return selectedColors.every((color) => product.colors.includes(color));
+      });
+    }
     setFilteredProducts(filteredProducts);
   };
 
